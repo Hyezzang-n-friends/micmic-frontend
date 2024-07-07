@@ -4,11 +4,16 @@ import { FC } from 'react';
 import { ISignInProps } from './interfaces';
 import { signIn } from 'next-auth/react';
 import { Button, Container, Flex } from '@radix-ui/themes';
+import { useSearchParams } from 'next/navigation';
 
 const SignIn: FC<ISignInProps> = ({ className, providers }) => {
+  const params = useSearchParams();
+
   const handleClick = async (id: string) => {
+    const returnUrl = params.get('returnUrl') || '/';
     await signIn(id, {
-      callbackUrl: '/'
+      callbackUrl: returnUrl,
+      redirect: true
     });
   };
 

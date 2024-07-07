@@ -12,10 +12,6 @@ export const authOptions: AuthOptions = {
     async session({ session, token, user }) {
       // 필요시 세션 정보 수정
       return session;
-    },
-    async redirect({ url, baseUrl }) {
-      // 로그인 후 리디렉션 설정
-      return baseUrl;
     }
   },
   pages: {
