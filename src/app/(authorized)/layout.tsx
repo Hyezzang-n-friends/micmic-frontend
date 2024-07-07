@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
-const ProtectedLayout: FC<PropsWithChildren> = async ({ children }) => {
+const AuthorizedLayout: FC<PropsWithChildren> = async ({ children }) => {
   const session = await getServerSession(authOptions);
 
   console.log(session);
@@ -14,4 +14,4 @@ const ProtectedLayout: FC<PropsWithChildren> = async ({ children }) => {
   return <>{children}</>;
 };
 
-export default ProtectedLayout;
+export default AuthorizedLayout;

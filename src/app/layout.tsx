@@ -6,8 +6,8 @@ import StyledComponentsRegistry from '@/components/StyledComponentsRegistry';
 const inter = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Solstice',
-  description: 'Solstice'
+  title: 'micmic',
+  description: 'micmic'
 };
 
 export default function RootLayout({
