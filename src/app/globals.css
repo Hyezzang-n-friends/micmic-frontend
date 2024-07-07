@@ -1,0 +1,21 @@
+:root {
+  --dark-main: #111;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: 'Noto Sans KR';
+  max-width: 1100px;
+  background: var(--dark-main);
+  margin: 0 auto;
+}
+
+body {
+  min-height: 100vh;
+}
