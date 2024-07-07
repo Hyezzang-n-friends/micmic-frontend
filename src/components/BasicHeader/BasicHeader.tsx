@@ -13,7 +13,7 @@ const BasicHeader: FC<BasicHeaderProps> = ({ className, session }) => {
   const pathname = usePathname();
 
   const handleClickSignOut = async () => {
-    await signOut();
+    await signOut({ callbackUrl: '/' });
   };
 
   return (
@@ -25,7 +25,7 @@ const BasicHeader: FC<BasicHeaderProps> = ({ className, session }) => {
 
         <Flex align="center" gap="10px">
           {routes.map((route) => (
-            <Link
+            <a
               key={route.path}
               href={route.path}
               className={`header__link ${
@@ -33,7 +33,7 @@ const BasicHeader: FC<BasicHeaderProps> = ({ className, session }) => {
               }`}
             >
               {route.name}
-            </Link>
+            </a>
           ))}
         </Flex>
 
