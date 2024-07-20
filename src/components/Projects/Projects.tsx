@@ -11,25 +11,17 @@ const Projects: FC<IProjects> = ({ className, projects }) => {
     <div className={`projects__template ${className}`}>
       <div className="projects__inner">
         <div className="projects__list">
-          {projects.length > 0 ? (
-            <Flex
-              wrap="wrap"
-              gap="16px"
-              width="100%"
-              style={{ alignSelf: 'start' }}
-            >
-              {projects.map((project) => (
-                <ProjectSerie key={project.id} {...project} />
-              ))}
-            </Flex>
-          ) : (
-            <div className="add__project">
-              <Button variant="outline" size="3">
-                <PlusIcon />
-                New Project
-              </Button>
-            </div>
-          )}
+          <Flex
+            wrap="wrap"
+            gap="16px"
+            width="100%"
+            style={{ alignSelf: 'start' }}
+          >
+            {projects.map((project) => (
+              <ProjectSerie key={project.id} {...project} />
+            ))}
+            <ProjectSerie id="add-card" type="new" />
+          </Flex>
         </div>
       </div>
     </div>
