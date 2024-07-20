@@ -29,7 +29,7 @@ const BasicHeader: FC<BasicHeaderProps> = ({ className, session }) => {
               key={route.path}
               href={route.path}
               className={`header__link ${
-                route.path === pathname ? 'active' : ''
+                pathname.includes(route.path) ? 'active' : ''
               }`}
             >
               {route.name}

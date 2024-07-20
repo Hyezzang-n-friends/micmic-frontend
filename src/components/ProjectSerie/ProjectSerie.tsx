@@ -1,10 +1,46 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { IProjectSerie } from './interfaces';
-import { Card, Flex, Text, Box } from '@radix-ui/themes';
+import {
+  Card,
+  Flex,
+  Text,
+  Box,
+  Dialog,
+  TextField,
+  Button,
+  Spinner
+} from '@radix-ui/themes';
 import Link from 'next/link';
 import { PlusIcon } from '@radix-ui/react-icons';
 
 const ProjectSerie: FC<IProjectSerie> = ({ type, className }) => {
+  const [isOpenNewProjectDialog, setIsOpenNewProjectDialog] =
+    useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [newProjectName, setNewProjectName] = useState<string>('');
+
+  const isValidProjectName = (name: string) => {
+    // 앞뒤 공백 제거 및 연속된 공백을 하나로 줄임
+    const trimmedName = name.trim().replace(/\s+/g, ' ');
+    const regex = /^[가-힣a-zA-Z0-9_. -]+$/;
+    return regex.test(trimmedName);
+  };
+
+  const handleClickNewConfirm = async () => {
+    if (isValidProjectName(newProjectName) === false) {
+      alert('프로젝트 이름을 확인해주세요.');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+    } finally {
+      setIsLoading(false);
+      setIsOpenNewProjectDialog(false);
+      setNewProjectName('');
+    }
+  };
+
   const renderCard = () => {
     if (type === 'project') {
       return (
@@ -35,18 +71,60 @@ const ProjectSerie: FC<IProjectSerie> = ({ type, className }) => {
 
     if (type === 'new') {
       return (
-        <Card asChild variant="ghost">
-          <Link href="/projects/new" className="add__link">
-            <Flex align="center" gap="3" minHeight="64px">
-              <Box flexGrow="1" maxWidth="100%" px="2">
-                <Flex align="center" maxWidth="100%" gap="2">
-                  <PlusIcon />
-                  <Text>새 프로젝트</Text>
+        <Dialog.Root
+          open={isOpenNewProjectDialog}
+          onOpenChange={setIsOpenNewProjectDialog}
+        >
+          <Dialog.Trigger>
+            <Card asChild variant="ghost">
+              <Link href="#" className="add__link">
+                <Flex align="center" gap="3" minHeight="64px">
+                  <Box flexGrow="1" maxWidth="100%" px="2">
+                    <Flex align="center" maxWidth="100%" gap="2">
+                      <PlusIcon />
+                      <Text>새 프로젝트</Text>
+                    </Flex>
+                  </Box>
                 </Flex>
-              </Box>
+              </Link>
+            </Card>
+          </Dialog.Trigger>
+
+          <Dialog.Content maxWidth="450px">
+            <Dialog.Title>새 프로젝트</Dialog.Title>
+            <Dialog.Description mb="4">
+              새 프로젝트를 생성합니다.
+            </Dialog.Description>
+
+            <Flex direction="column" gap="3">
+              <label>
+                <Text as="div" size="2" mb="1" weight="bold">
+                  프로젝트 이름
+                </Text>
+                <TextField.Root
+                  placeholder="프로젝트 이름을 입력하세요"
+                  value={newProjectName}
+                  onChange={(e) => setNewProjectName(e.target.value)}
+                  onKeyDown={(e) =>
+                    e.key === 'Enter' && handleClickNewConfirm()
+                  }
+                />
+              </label>
             </Flex>
-          </Link>
-        </Card>
+
+            <Flex gap="3" mt="4" justify="end">
+              <Button onClick={handleClickNewConfirm} disabled={isLoading}>
+                <Spinner loading={isLoading} />
+                추가
+              </Button>
+              <Dialog.Close>
+                <Button variant="soft" color="gray">
+                  취소
+                </Button>
+              </Dialog.Close>
+            </Flex>
+          </Dialog.Content>
+        </Dialog.Root>
       );
     }
 
