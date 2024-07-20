@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
-import { Container, Theme } from '@radix-ui/themes';
+import { Theme } from '@radix-ui/themes';
 import StyledComponentsRegistry from '@/components/StyledComponentsRegistry';
-import BasicHeader from '@/components/BasicHeader';
 import SessionProvider from '@/components/SessionProvider';
+import LayoutWithHeader from '@/components/LayoutWithHeader';
+import { getServerSession } from 'next-auth';
 
 import './globals.css';
 import '@radix-ui/themes/styles.css';
-import { getServerSession } from 'next-auth';
 
 const inter = Noto_Sans_KR({ subsets: ['latin'] });
 
@@ -29,10 +29,7 @@ export default async function RootLayout({
         <Theme appearance="dark">
           <StyledComponentsRegistry>
             <SessionProvider>
-              <Container size="4">
-                <BasicHeader session={session} />
-                {children}
-              </Container>
+              <LayoutWithHeader session={session}>{children}</LayoutWithHeader>
             </SessionProvider>
           </StyledComponentsRegistry>
         </Theme>

@@ -1,3 +1,9 @@
-export default function Projects() {
-  return <main>aa</main>;
+import Projects from '@/components/Projects';
+
+export default function ProjectsPage() {
+  return (
+    <main>
+      <Projects projects={[{ id: '1' }]} />
+    </main>
+  );
 }
