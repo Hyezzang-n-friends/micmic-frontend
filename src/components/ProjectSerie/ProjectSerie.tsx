@@ -45,7 +45,7 @@ const ProjectSerie: FC<IProjectSerie> = ({ type, className }) => {
     if (type === 'project') {
       return (
         <Card asChild>
-          <Link href="/project/1">
+          <Link href="/projects/1">
             <Flex align="center" gap="3" minHeight="64px">
               {/* <Box maxWidth="64px" maxHeight="64px"></Box> */}
               <Box flexGrow="1" maxWidth="100%" px="2">

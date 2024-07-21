@@ -9,7 +9,6 @@ const StyledLayoutWithHeader = styled(LayoutWithHeader)`
   min-height: 100vh;
 
   .basic__header + main {
-    padding-top: 52px;
     flex: 1;
     display: flex;
 

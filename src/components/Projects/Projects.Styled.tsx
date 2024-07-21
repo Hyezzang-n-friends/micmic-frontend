@@ -5,10 +5,11 @@ import Projects from './Projects';
 
 const StyledProjects = styled(Projects)`
   display: flex;
+  padding-top: 40px;
 
   .projects__inner {
     flex: 1;
-    padding: 0 16px;
+    padding: 0 48px;
     display: flex;
 
     .projects__list {

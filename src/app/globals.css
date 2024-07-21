@@ -7,8 +7,5 @@
 html,
 body {
   font-family: 'Noto Sans KR';
-}
-
-body {
-  padding: 0 32px !important;
+  min-width: 1200px;
 }
